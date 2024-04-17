@@ -1,0 +1,20 @@
+meta {
+  name: upload
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:5000/upload
+  body: multipartForm
+  auth: none
+}
+
+headers {
+  Content-Range: bytes 0-361093/361093
+  X-File-Id: dmpdf-2024-corrected-pdf-361093-1713209706488
+}
+
+body:multipart-form {
+  file: @file(/home/rildev/Documents/taxes/dmPDF-2024-corrected.pdf)
+}

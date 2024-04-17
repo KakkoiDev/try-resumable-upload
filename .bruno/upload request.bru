@@ -1,0 +1,17 @@
+meta {
+  name: upload request
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:5000/upload/request
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "filename": "dmpdf-2024-corrected-pdf-361093-1713209706488"
+  }
+}

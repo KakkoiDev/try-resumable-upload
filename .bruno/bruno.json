@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "try-resumable-upload",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
