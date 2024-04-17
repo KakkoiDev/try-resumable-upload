@@ -41,7 +41,6 @@ app.post("/upload", (req, res) => {
     }
 
     bb.on("file", (_, file, info) => {
-      console.log({ file, info });
       ext = info.filename.split(".")[1];
       file.pipe(fs.createWriteStream(filePath, { flags: "a" }));
     });
