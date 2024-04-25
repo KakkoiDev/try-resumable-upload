@@ -44,7 +44,7 @@ const uploadFile = ({ file, fileId, startByte }) => {
     displayStatus.innerHTML = "paused";
   });
 
-  request.open("POST", "http://localhost:5000/upload", true);
+  request.open("POST", "http://localhost:5000/upload");
   request.setRequestHeader("X-File-Id", fileId);
   request.setRequestHeader(
     "Content-Range",

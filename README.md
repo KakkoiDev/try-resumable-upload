@@ -23,3 +23,11 @@ Implement a resumable upload from scratch: https://www.youtube.com/watch?v=R2AD1
 Javascript.info, resumable upload: https://javascript.info/resume-upload
 
 Uppy, the all in on resumable upload solution: https://uppy.io/
+
+## Todos
+
+- [ ] refactor `/public/index.js`, separate logic from DOM update
+- [x] remove XMLHttpRequest optional second argument
+- [ ] merge `POST /request` and `GET /status` into one endpoint
+- [ ] add retry
+- [ ] make it Tus compliant
