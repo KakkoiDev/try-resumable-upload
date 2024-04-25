@@ -75,15 +75,9 @@ const resumableUpload = async (file) => {
     `${file.name}-${file.size}-${file.lastModified}`
   );
 
-  const startByteResponse = await fetch("http://localhost:5000/upload/check", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      fileId,
-    }),
-  });
+  const startByteResponse = await fetch(
+    `http://localhost:5000/upload/check/${fileId}`
+  );
 
   const startByte = Number(await startByteResponse.text());
 

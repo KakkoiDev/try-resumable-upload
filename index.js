@@ -57,10 +57,9 @@ app.post("/upload", (req, res) => {
   }
 });
 
-app.post("/upload/check", (req, res) => {
+app.get("/upload/check/:fileId", (req, res) => {
   try {
-    const data = req.body;
-    const fileId = sanitizeFilename(data.fileId);
+    const fileId = sanitizeFilename(req.params.fileId);
     const filePath = path.join(uploadPath, fileId);
 
     if (!fileId) throw new Error("Missing filename!");
