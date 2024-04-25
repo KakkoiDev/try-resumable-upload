@@ -4,6 +4,12 @@ Upload a file. If the upload gets interupted, resume the upload from where it le
 
 ![demo](./demo.gif)
 
+## Features
+
+- Pause/resume upload
+- Close tab and resume download from where it left off
+- Retry in case of network failure (untested, see reason in the Bugs section)
+
 ## How Does It Work?
 
 1. Using the `XMLHttpRequest` class, the client sends a file to `POST /upload`. The client displays what percentage of the file has been sent.
@@ -15,6 +21,11 @@ Upload a file. If the upload gets interupted, resume the upload from where it le
 Install dependencies: `npm i`
 
 Start dev server: `npm run dev`
+
+## Bugs
+
+Simulate network failure: When switching the network to "Offline", the upload completes at full speed. Probably a Chrome bug.
+![bug](./bug.gif)
 
 ## Resources
 
@@ -29,6 +40,6 @@ Uppy, the all in on resumable upload solution: https://uppy.io/
 - [ ] refactor `/public/index.js`, separate logic from DOM update
 - [x] remove XMLHttpRequest optional second argument
 - [x] merge `POST /request` and `GET /status` into one endpoint
-- [ ] add retry
+- [x] add retry (untested, see Bugs section)
 - [ ] make it Tus compliant
 - [ ] handle multi-upload
