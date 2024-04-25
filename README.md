@@ -28,6 +28,7 @@ Uppy, the all in on resumable upload solution: https://uppy.io/
 
 - [ ] refactor `/public/index.js`, separate logic from DOM update
 - [x] remove XMLHttpRequest optional second argument
-- [ ] merge `POST /request` and `GET /status` into one endpoint
+- [x] merge `POST /request` and `GET /status` into one endpoint
 - [ ] add retry
 - [ ] make it Tus compliant
+- [ ] handle multi-upload

@@ -1,6 +1,4 @@
-// how to import scripts
-// import { sanitizeFilename } from "./lib/index.js";
-// console.log({ sanitizeFilename });
+import { sanitizeFilename } from "./lib/index.js";
 
 // get file
 const label = document.querySelector("label");
@@ -73,21 +71,19 @@ const uploadFile = ({ file, fileId, startByte }) => {
 };
 
 const resumableUpload = async (file) => {
-  const idResponse = await fetch("http://localhost:5000/upload/request", {
+  const fileId = sanitizeFilename(
+    `${file.name}-${file.size}-${file.lastModified}`
+  );
+
+  const startByteResponse = await fetch("http://localhost:5000/upload/check", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      filename: `${file.name}-${file.size}-${file.lastModified}`,
+      fileId,
     }),
   });
-
-  const fileId = await idResponse.text();
-
-  const startByteResponse = await fetch(
-    `http://localhost:5000/upload/status/${fileId}`
-  );
 
   const startByte = Number(await startByteResponse.text());
 

@@ -41,7 +41,7 @@ app.post("/upload", (req, res) => {
     }
 
     bb.on("file", (_, file, info) => {
-      ext = info.filename.split(".")[1];
+      ext = info.filename.split(".").at(-1);
       file.pipe(fs.createWriteStream(filePath, { flags: "a" }));
     });
 
@@ -57,36 +57,25 @@ app.post("/upload", (req, res) => {
   }
 });
 
-app.post("/upload/request", (req, res) => {
+app.post("/upload/check", (req, res) => {
   try {
     const data = req.body;
-    const filename = sanitizeFilename(data.filename);
-    const filePath = path.join(uploadPath, filename);
+    const fileId = sanitizeFilename(data.fileId);
+    const filePath = path.join(uploadPath, fileId);
 
-    if (!filename) throw new Error("Missing filename!");
+    if (!fileId) throw new Error("Missing filename!");
 
     if (!fs.existsSync(filePath)) {
       fs.writeFileSync(filePath, "");
+      return res.status(200).send(String(0));
     }
 
-    return res.status(200).send(filename);
+    const file = fs.readFileSync(filePath);
+    return res.status(200).send(String(file.length));
   } catch (error) {
     console.error(error);
     return res.status(500).send("Internal server error!");
   }
-});
-
-app.get("/upload/status/:filename", (req, res) => {
-  const filename = sanitizeFilename(req.params.filename);
-  const filePath = path.join(uploadPath, filename);
-
-  if (fs.existsSync(filePath)) {
-    const file = fs.readFileSync(filePath);
-
-    return res.status(200).send(String(file.length));
-  }
-
-  return res.status(404).send("File not found!");
 });
 
 app.all("*", (req, res) => {
