@@ -69,8 +69,9 @@ app.get("/upload/check/:fileId", (req, res) => {
       return res.status(200).send(String(0));
     }
 
-    const file = fs.readFileSync(filePath);
-    return res.status(200).send(String(file.length));
+    fs.stat(filePath, (_error, stats) => {
+      return res.status(200).send(String(stats.size));
+    });
   } catch (error) {
     console.error(error);
     return res.status(500).send("Internal server error!");
